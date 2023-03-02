@@ -8,7 +8,7 @@ Tehtävä on kaksiosainen:
 
 2. Toisessa osassa sinun tulee hyödyntää [reittioppaan](https://www.hsl.fi/) taustalla toimivaa [GraphQL-reitityspalvelua](https://digitransit.fi/en/developers/apis/1-routing-api/0-graphql/) etsiäksesi reitin kahden käyttäjän määrittelemän paikan välillä.
 
-💡 Voit toteuttaa halutessasi ratkaisusi myös **Pythonilla**, mutta tällöin tehtävää ei arvioida automaattisesti ja joudut soveltamaan tehtävänantoa itsenäisesti.
+💡 Voit toteuttaa halutessasi ratkaisusi myös **Pythonilla**, mutta tällöin joudut soveltamaan tehtävänantoa varsin itsenäisesti. Hyväksy Teamsissa tehtävästä Python-versio ja toteuta ohjelmasi siten, että se voidaan suorittaa esim. komennolla `python3 route.py "helsinki-vantaa lentoasema" "suomenlinna"`. Mikäli käytät apuna pip-paketteja, määrittele projektiisi [`requirements.txt`-tiedosto](https://pip.pypa.io/en/stable/user_guide/#requirements-files), jonka avulla nämä paketit asennetaan myös testausympäristöön.
 
 
 ## Mikä on GraphQL?
