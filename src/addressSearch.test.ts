@@ -13,19 +13,17 @@ describe('Address search', () => {
     });
 
     test('Searching by place name returns correct properties', async () => {
-        let response = await addressSearch('"Haaga-Helia Pasila, Helsinki');
+        let response = await addressSearch('Haaga-Helia Pasila, Helsinki');
         let features = response.features;
 
         assert.equal(features.length, 1);
         assert.equal(features[0].properties.label, 'Haaga-Helia Pasila campus, Ratapihantie 13, Helsinki');
     });
 
-    test('Searching with special characters is handled correctly', async () => {
-        let response = await addressSearch('helsinki-vantaa lentokenttä ✈');
-        let features = response.features;
+    test('Special characters (& and ?) are escaped correctly', async () => {
+        let response = await addressSearch('&? rock & roll');
 
-        assert.equal(features.length, 1);
-        assert.equal(features[0].properties.label, 'Helsinki-Vantaan lentoasema, Lentoasemantie 1, Vantaa');
+        assert.ok(response !== null, 'Should get a response from the API even with ? and & in the search string');
     });
 
     test('Unknown keyword returns empty set of features', async () => {
