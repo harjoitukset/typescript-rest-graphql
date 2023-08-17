@@ -2,7 +2,7 @@ import { AddressSearchResponse } from './types/GeocodingApi';
 import fetch from 'node-fetch';
 
 // see https://www.npmjs.com/package/dotenv
-import 'dotenv/config';
+require('dotenv').config();
 
 
 /**

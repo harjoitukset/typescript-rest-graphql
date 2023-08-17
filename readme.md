@@ -58,7 +58,7 @@ Lisäksi riippuvuuksissa on [dotenv-paketti](https://www.npmjs.com/package/doten
 
 ```ts
 // see https://www.npmjs.com/package/dotenv
-import 'dotenv/config';
+require('dotenv').config();
 
 // ympäristömuuttuja on nyt luettu .env-tiedostosta
 let apiKey = process.env['DIGITRANSIT_API_KEY'];
