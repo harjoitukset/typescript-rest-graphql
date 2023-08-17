@@ -6,9 +6,7 @@ Tehtävä on kaksiosainen:
 
 1. Ensimmäisessä osassa sinun tulee hakea käyttäjän antamaa paikan nimeä vastaavat sijaintitiedot [Digitransit-palvelun rajapinnasta](https://digitransit.fi/en/developers/apis/2-geocoding-api/address-search/). Tämä osa testataan valmiilla Jest-yksikkötesteillä.
 
-2. Toisessa osassa sinun tulee hyödyntää [reittioppaan](https://www.hsl.fi/) taustalla toimivaa [GraphQL-reitityspalvelua](https://digitransit.fi/en/developers/apis/1-routing-api/0-graphql/) etsiäksesi reitin kahden käyttäjän määrittelemän paikan välillä.
-
-💡 Voit toteuttaa halutessasi ratkaisusi myös **Pythonilla**, mutta tällöin joudut soveltamaan tehtävänantoa varsin itsenäisesti. Hyväksy Teamsissa tehtävästä Python-versio ja toteuta ohjelmasi siten, että se voidaan suorittaa komennolla `python3 route.py "helsinki-vantaa lentoasema" "suomenlinna"`. Mikäli käytät ratkaisussasi pip-paketteja, määrittele projektiisi [`requirements.txt`-tiedosto](https://pip.pypa.io/en/stable/user_guide/#requirements-files), jonka avulla nämä paketit asennetaan myös testausympäristöön.
+2. Toisessa osassa sinun tulee hyödyntää [reittioppaan](https://www.hsl.fi/) taustalla toimivaa [GraphQL-reitityspalvelua](https://digitransit.fi/en/developers/apis/1-routing-api/0-graphql/) etsiäksesi reitin kahden käyttäjän määrittelemän paikan välillä. Tämä osa testataan suorittamalla koodisi ja tarkastamalla ehdotettu reitti.
 
 
 ## Mikä on GraphQL?
@@ -25,7 +23,7 @@ Lisäksi ennen tehtävän toisen osan aloitusta suosittelemme lukemaan Digitrans
 
 ## API-avaimet ja tunnistautuminen 🔐
 
-Digitransit-rajapinnat vaativat 3.4.2023 alkaen tunnistautumista API-avainten avulla. Palveluun rekisteröityminen onnistuu halutessasi ilmaiseksi osoitteessa https://portal-api.digitransit.fi/. Rekisteröinnin jälkeen voit "tilata" itsellesi "Digitransit developer API"-palvelun "Products"-välilehdellä. Tilauksen jälkeen löydät API-avaimesi "Profile"-välilehdeltä. Vaihtoehtoisesti voit ratkaista tehtävän luomalla siitä GitHub codespace:n. Codespace:ssa API-avain on valmiiksi saatavilla ympäristömuuttujassa.
+Digitransit-rajapinnat vaativat tunnistautumista API-avainten avulla. Palveluun rekisteröityminen onnistuu halutessasi ilmaiseksi osoitteessa https://portal-api.digitransit.fi/. Rekisteröinnin jälkeen voit "tilata" itsellesi "Digitransit developer API"-palvelun "Products"-välilehdellä. Tilauksen jälkeen löydät API-avaimesi "Profile"-välilehdeltä. Vaihtoehtoisesti voit ratkaista tehtävän luomalla siitä GitHub codespace:n. Codespace:ssa API-avain on valmiiksi saatavilla `DIGITRANSIT_API_KEY`-ympäristömuuttujassa.
 
 Rajapintakutsuissa tunnistautuminen onnistuu varsin yksinkertaisesti. Sinun tulee vain lisätä jokaiseen HTTP-pyyntöön `digitransit-subscription-key`-niminen parametri tai "header":
 
@@ -41,7 +39,7 @@ let apiKey = process.env['DIGITRANSIT_API_KEY'];
 
 Ympäristömuuttujien käytön helpottamiseksi tehtäväpohjassa on valmiiksi asennettuna [dotenv-paketti](https://www.npmjs.com/package/dotenv). Voit halutessasi määritellä ympäristömuuttujat `.env`-nimiseen tiedostoon, jotka dotenv kopioi ympäristömuuttujiksi. Tätä `.env`-tiedostoa **ei tule lisätä versionhallintaan** ja se onkin rajattu pois versionhallinnasta [.gitignore](./.gitignore)-tiedoston avulla.
 
-API-avainta käytetään myös GitHub classroom -palvelussa tehtävää tarkastettaessa. Tarkastusympäristössä API-avain on `DIGITRANSIT_API_KEY`-ympäristömuuttujassa, joten on tärkeää, että käytät omassa koodissasi saman nimistä muuttujaa.
+💡 *API-avainta käytetään myös GitHub classroom -palvelussa tehtävää tarkastettaessa. Tarkastusympäristössä API-avain on `DIGITRANSIT_API_KEY`-ympäristömuuttujassa, joten on tärkeää, että käytät omassa koodissasi saman nimistä muuttujaa.*
 
 
 ## Riippuvuuksien asentaminen 📦
@@ -62,7 +60,7 @@ Lisäksi riippuvuuksissa on [dotenv-paketti](https://www.npmjs.com/package/doten
 // see https://www.npmjs.com/package/dotenv
 import 'dotenv/config';
 
-// process.env on nyt luettu .env-tiedostosta
+// ympäristömuuttuja on nyt luettu .env-tiedostosta
 let apiKey = process.env['DIGITRANSIT_API_KEY'];
 ```
 
