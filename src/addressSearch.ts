@@ -1,6 +1,10 @@
 import { AddressSearchResponse } from './types/GeocodingApi';
 import fetch from 'node-fetch';
 
+// see https://www.npmjs.com/package/dotenv
+import 'dotenv/config';
+
+
 /**
  * "Address search can be used to search addresses and points of interest (POIs).
  * An address is matched to its corresponding geographic coordinates and in the

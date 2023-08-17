@@ -25,13 +25,11 @@ Lisäksi ennen tehtävän toisen osan aloitusta suosittelemme lukemaan Digitrans
 
 ## API-avaimet ja tunnistautuminen 🔐
 
-Digitransit-rajapinnat vaativat 3.4.2023 alkaen tunnistautumista API-avainten avulla. **Siihen asti tehtävässä ei tarvitse huolehtia rekisteröitymisestä eikä API-tunnuksista.**
+Digitransit-rajapinnat vaativat 3.4.2023 alkaen tunnistautumista API-avainten avulla. Palveluun rekisteröityminen onnistuu halutessasi ilmaiseksi osoitteessa https://portal-api.digitransit.fi/. Rekisteröinnin jälkeen voit "tilata" itsellesi "Digitransit developer API"-palvelun "Products"-välilehdellä. Tilauksen jälkeen löydät API-avaimesi "Profile"-välilehdeltä. Vaihtoehtoisesti voit ratkaista tehtävän luomalla siitä GitHub codespace:n. Codespace:ssa API-avain on valmiiksi saatavilla ympäristömuuttujassa.
 
-Siirtymäajan jälkeen API-avain on välttämätön. Palveluun rekisteröityminen onnistuu osoitteessa https://portal-api.digitransit.fi/. Rekisteröinnin jälkeen voit "tilata" itsellesi "Digitransit developer API"-palvelun "Products"-välilehdellä. Tilauksen jälkeen löydät API-avaimesi "Profile"-välilehdeltä.
+Rajapintakutsuissa tunnistautuminen onnistuu varsin yksinkertaisesti. Sinun tulee vain lisätä jokaiseen HTTP-pyyntöön `digitransit-subscription-key`-niminen parametri tai "header":
 
-Tunnistautuminen onnistuu koodissa yksinkertaisesti. Sinun tulee vain lisätä jokaiseen HTTP-pyyntöön `digitransit-subscription-key`-parametri tai "header":
-
-> *"An API key can be included either as a URL parameter or as a header. The parameter and the header name are both `digitransit-subscription-key` and the value should be the key. "*
+> *"An API key can be included either as a URL parameter or as a header. The parameter and the header name are both `digitransit-subscription-key` and the value should be the key."*
 >
 > https://digitransit.fi/en/developers/api-registration/
 
@@ -41,9 +39,9 @@ Tunnistautuminen onnistuu koodissa yksinkertaisesti. Sinun tulee vain lisätä j
 let apiKey = process.env['DIGITRANSIT_API_KEY'];
 ```
 
-[Tarvittaessa voit käyttää apuna myös `.env`-tiedostoa](https://www.npmjs.com/package/dotenv), jota ei tule lisätä versionhallintaan.
+Ympäristömuuttujien käytön helpottamiseksi tehtäväpohjassa on valmiiksi asennettuna [dotenv-paketti](https://www.npmjs.com/package/dotenv). Voit halutessasi määritellä ympäristömuuttujat `.env`-nimiseen tiedostoon, jotka dotenv kopioi ympäristömuuttujiksi. Tätä `.env`-tiedostoa **ei tule lisätä versionhallintaan** ja se onkin rajattu pois versionhallinnasta [.gitignore](./.gitignore)-tiedoston avulla.
 
-API-avainta tarvitaan myös GitHub classroom -palvelussa tehtävää tarkastettaessa. Tarkastusympäristössä on valmiiksi saatavilla API-tunnus `DIGITRANSIT_API_KEY`-ympäristömuuttujassa, joten on tärkeää, että käytät omassa ympäristössäsi saman nimistä muuttujaa.
+API-avainta käytetään myös GitHub classroom -palvelussa tehtävää tarkastettaessa. Tarkastusympäristössä API-avain on `DIGITRANSIT_API_KEY`-ympäristömuuttujassa, joten on tärkeää, että käytät omassa koodissasi saman nimistä muuttujaa.
 
 
 ## Riippuvuuksien asentaminen 📦
@@ -56,8 +54,17 @@ $ npm install
 
 Riippuvuudet sisältävät sekä [TypeScript-kielen](https://www.npmjs.com/package/typescript), [Jest-testaustyökalun](https://www.npmjs.com/package/jest) että [`ts-node`](https://www.npmjs.com/package/ts-node)- ja [`ts-jest`](https://www.npmjs.com/package/ts-jest)-paketit TypeScript-kielisen koodin ja testien suorittamiseksi Node.js:llä.
 
-Lisäksi riippuvuuksista löytyy [`node-fetch`](https://www.npmjs.com/package/node-fetch), joka mahdollistaa selaimista tutun `fetch`-funktion hyödyntämisen REST-rajapinnan kutsumiseksi. Node.js:n [versiosta 18 alkaen](https://nodejs.org/dist/latest/docs/api/globals.html#fetch) `fetch`-funktio kuuluu osaksi standardikirjastoa, eikä vaadi enää erillistä asennusta.
+Riippuvuuksista löytyy myös [`node-fetch`](https://www.npmjs.com/package/node-fetch), joka mahdollistaa selaimista tutun `fetch`-funktion hyödyntämisen REST-rajapinnan kutsumiseksi. Node.js:n [versiosta 18 alkaen](https://nodejs.org/dist/latest/docs/api/globals.html#fetch) `fetch`-funktio kuuluu osaksi standardikirjastoa, eikä vaadi enää erillistä asennusta.
 
+Lisäksi riippuvuuksissa on [dotenv-paketti](https://www.npmjs.com/package/dotenv), jonka avulla ympäristömuuttujat saadaan luettua paikallisesta `.env`-nimisestä tiedostosta. Paketin käyttäminen edellyttää lähdekoodiin `import`-komentoa, joka löytyy valmiina [addressSearch.ts](./src/addressSearch.ts)-tiedostosta:
+
+```ts
+// see https://www.npmjs.com/package/dotenv
+import 'dotenv/config';
+
+// process.env on nyt luettu .env-tiedostosta
+let apiKey = process.env['DIGITRANSIT_API_KEY'];
+```
 
 ## Osa 1: Perinteinen JSON-rajapinta (2p)
 
